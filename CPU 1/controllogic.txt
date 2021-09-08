@@ -1,0 +1,146 @@
+Control logic:
+
+ALU Control Words
+
+0000 - Nothing (NO output)
+0001 - Add
+0010 - Subtract
+0011 - Multiply
+0100 - Divide
+0101 - Remainder / Modulo
+
+0110 - AND
+0111 - NAND
+1000 - OR
+1001 - NOR
+1010 - XOR
+1011 - XNOR
+1100 - NOT a
+1101 - NOT b
+
+ALU Flags 
+01 - Overflow flag (for addition and multiplication)
+10 - Negative flag
+
+Register Zero flags (updates one clock cycle after write to register)
+01 - A Register is 0
+10 - B Register is 0
+11 - Both registers are 0
+
+Jump control words
+
+0000 - Nothing (dont jump)
+0001 - Unconditonal
+
+0010 - Jump if a is 0
+0011 - Jump if a is not 0
+0100 - Jump if b is 0
+0101 - Jump if b is not 0
+
+0110 - Jump if negative flag is set
+0111 - Jump if negative flag is not set
+1000 - Jump if overflow flag is set
+1001 - Jump if overflow flag is not set
+
+
+microcode:
+
+Fetch1-T0 - 0x000101 - Counter Out, MAR In
+Fetch1-T1 - 0x000282 - Memory out, IR in, Counter Enable
+
+Fetch2-T2 - 0x000101 - Counter Out, MAR in
+Fetch2-T3 - 0x000482 - Memory Out, IDR in, Counter Enable
+
+NOP-T2 - 0x001000 - Instruction reset
+
+DLA-T4 - 0x000804 - IDR out, A in
+
+DLB-T4 - 0x000810 - IDR Out, B in
+
+LDA-T4 - 0x000900 - IDR out, MAR in
+LDA-T5 - 0x000084 - Memory Out, A in
+
+LDB-T4 - 0x000900 - IDR out, MAR in
+LDB-T5 - 0x000090 - Memory Out, B in
+
+STA-T4 - 0x000900 - IDR out, MAR in
+STA-T5 - 0x000048 - A Out, Memory In
+
+
+ADD-T4 - 0x000900 - IDR out, MAR in
+ADD-T5 - 0x000090 - Memory out, B in
+ADD-T6 - 0x100004 - ALU 0001, A in
+
+ADDI-T4 - 0x000810 - IDR out, B in
+ADDI-T5 - 0x100004 - ALU 0001, A in
+
+SUB-T4 - 0x000900 - IDR out, MAR in
+SUB-T5 - 0x000090 - Memory out, B in
+SUB-T6 - 0x200004 - ALU 0010, A in
+
+SUBI-T4 - 0x000810 - IDR out, B in
+SUBI-T5 - 0x200004 - ALU 0010, A in
+
+MUL-T4 - 0x000900 - IDR out, MAR in
+MUL-T5 - 0x000090 - Memory out, B in
+MUL-T6 - 0x300004 - ALU 0011, A in
+
+MULI-T4 - 0x000810 - IDR out, B in
+MULI-T5 - 0x300004 - ALU 0011, A in
+
+DIV-T4 - 0x000900 - IDR out, MAR in
+DIV-T5 - 0x000090 - Memory out, B in
+DIV-T6 - 0x400004 - ALU 0100, A in
+
+DIVI-T4 - 0x000810 - IDR out, B in
+DIVI-T5 - 0x400004 - ALU 0100, A in
+
+MOD-T4 - 0x000900 - IDR out, MAR in
+MOD-T5 - 0x000090 - Memory out, B in
+MOD-T6 - 0x500004 - ALU 0101, A in
+
+MODI-T4 - 0x000810 - IDR out, B in
+MODI-T5 - 0x500004 - ALU 0101, A in
+
+AND-T5 - 0x000900 - IDR out, MAR in
+AND-T6 - 0x600040 - ALU 0110, Memory in
+
+NAND-T5 - 0x000900 - IDR out, MAR in
+NAND-T6 - 0x700040 - ALU 0111, Memory in
+
+OR-T5 - 0x000900 - IDR out, MAR in
+OR-T6 - 0x800040 - ALU 1000, Memory in
+
+NOR-T5 - 0x000900 - IDR out, MAR in
+NOR-T6 - 0x900040 - ALU 1001, Memory in
+
+XOR-T5 - 0x000900 - IDR out, MAR in
+XOR-T6 - 0xA00040 - ALU 1010, Memory in
+
+XNOR-T5 - 0x000900 - IDR out, MAR in
+XNOR-T6 - 0xB00040 - ALU 1011, Memory in
+
+NOTA-T5 - 0x000900 - IDR out, MAR in
+NOTA-T6 - 0xC00040 - ALU 1100, Memory in
+
+NOTB-T5 - 0x000900 - IDR out, MAR in
+NOTB-T6 - 0xD00040 - ALU 1101, Memory in
+
+
+JMP-T5 0x180800 - Jump on, JMP_CW 0001, IDR out
+JAZ-T5 0x280800 - Jump on, JMP_CW 0010, IDR out
+JANZ-T5 0x380800 - Jump on, JMP_CW 0011, IDR out
+JBZ-T5 0x480800 - Jump on, JMP_CW 0100, IDR out
+JBNZ-T5 0x580800 - Jump on, JMP_CW 0101, IDR out
+
+JN-T5 0x680800 - Jump on, JMP_CW 0110, IDR out
+JNN-T5 0x780800 - Jump on, JMP_CW 0111, IDR out
+JO-T5 0x880800 - Jump on, JMP_CW 1000, IDR out
+JNO-T5 0x980800 - Jump on, JMP_CW 1001, IDR out
+
+HLT-T3 0x002000 - Halt
+
+OUTa-T3 0x004008 - A out, output in
+
+OUT-T5 - 0x000900 - IDR out, MAR in
+OUT-T6 - 0x004040 - Memory out, output in

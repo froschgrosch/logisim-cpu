@@ -1,0 +1,70 @@
+Microcode: 
+
+Fetch1-T0 - 0x000101 - Counter Out, MAR In
+Fetch1-T1 - 0x000282 - Memory out, IR in, Counter Enable
+
+Fetch2-T2 - 0x000101 - Counter Out, MAR in
+Fetch2-T3 - 0x000482 - Memory Out, IDR in, Counter Enable
+
+
+NOP-T2 - 0x001000 - Instr. reset
+
+DLOAD-T4 - 0x001804 - IDR out, A in, Instr. reset
+
+LOAD-T4 - 0x000900 - IDR out, MAR in
+LOAD-T5 - 0x001084 - Memory out, A in, Instr. reset
+
+STORE-T4 - 0x000900 - IDR out, MAR in
+STORE-T5 - 0x001048 - A out, Memory in, Instr. reset
+
+DOUT-T3 0x005008 - A out, output in, Instr. reset
+
+OUT-T5 - 0x000900 - IDR out, MAR in
+OUT-T6 - 0x005040 - Memory out, output in, Instr. reset
+
+HLT-T3 - 0x002000 - Halt
+
+ADD-T4 - 0x000900 - IDR out, MAR in
+ADD-T5 - 0x000090 - Memory out, B in
+ADD-T6 - 0x101004 - ALU 0001, A in, Instr. reset
+
+ADDI-T4 - 0x000810 - IDR out, B in
+ADDI-T5 - 0x101004 - ALU 0001, A in, Instr. reset
+
+SUB-T4 - 0x000900 - IDR out, MAR in
+SUB-T5 - 0x000090 - Memory out, B in
+SUB-T6 - 0x201004 - ALU 0010, A in, Instr. reset
+
+SUBI-T4 - 0x000810 - IDR out, B in
+SUBI-T5 - 0x201004 - ALU 0010, A in, Instr. reset
+
+MUL-T4 - 0x000900 - IDR out, MAR in
+MUL-T5 - 0x000090 - Memory out, B in
+MUL-T6 - 0x301004 - ALU 0011, A in, Instr. reset
+
+MULI-T4 - 0x000810 - IDR out, B in
+MULI-T5 - 0x301004 - ALU 0011, A in, Instr. reset
+
+DIV-T4 - 0x000900 - IDR out, MAR in
+DIV-T5 - 0x000090 - Memory out, B in
+DIV-T6 - 0x401004 - ALU 0100, A in, Instr. reset
+
+DIVI-T4 - 0x000810 - IDR out, B in
+DIVI-T5 - 0x401004 - ALU 0100, A in, Instr. reset
+
+MOD-T4 - 0x000900 - IDR out, MAR in
+MOD-T5 - 0x000090 - Memory out, B in
+MOD-T6 - 0x501004 - ALU 0101, A in, Instr. reset
+
+MODI-T4 - 0x000810 - IDR out, B in
+MODI-T5 - 0x501004 - ALU 0101, A in, Instr. reset
+
+
+JMP-T5 - 0x181800 - Jump on, IDR out, JMP_CW 0001, Instr. reset
+JZ-T5  - 0x281800 - Jump on, IDR out, JMP_CW 0010, Instr. reset
+JNZ-T5 - 0x381800 - Jump on, IDR out, JMP_CW 0011, Instr. reset
+
+JN-T5  - 0x481800 - Jump on, IDR out, JMP_CW 0100, Instr. reset
+JNN-T5 - 0x581800 - Jump on, IDR out, JMP_CW 0101, Instr. reset
+JO-T5  - 0x681800 - Jump on, IDR out, JMP_CW 0110, Instr. reset
+JNO-T5 - 0x781800 - Jump on, IDR out, JMP_CW 0111, Instr. reset

@@ -64,3 +64,48 @@ It is recommended to use the v6 version if you want to use the 8 bit cpu.
 - JNN (0x1E) - Jumps if the negative flag is not set
 - JO (0x1F)  - Jumps if overflow flag is set
 - JNO (0x20) - Jumps if the overflow flag is not set
+
+
+# Control logic:
+
+## ALU Control Words
+
+- 0000 - Nothing (NO output)
+- 0001 - Add
+- 0010 - Subtract
+- 0011 - Multiply
+- 0100 - Divide
+- 0101 - Remainder / Modulo
+
+- 0110 - AND
+- 0111 - NAND
+- 1000 - OR
+- 1001 - NOR
+- 1010 - XOR
+- 1011 - XNOR
+- 1100 - NOT a
+- 1101 - NOT b
+
+## ALU Flags 
+- 01 - Overflow flag (for addition and multiplication)
+- 10 - Negative flag
+
+## Register Zero flags (updates one clock cycle after write to register)
+- 01 - A Register is 0
+- 10 - B Register is 0
+- 11 - Both registers are 0
+
+## Jump control words
+
+- 0000 - Nothing (dont jump)
+- 0001 - Unconditonal
+
+- 0010 - Jump if a is 0
+- 0011 - Jump if a is not 0
+- 0100 - Jump if b is 0
+- 0101 - Jump if b is not 0 
+
+- 0110 - Jump if negative flag is set
+- 0111 - Jump if negative flag is not set
+- 1000 - Jump if overflow flag is set
+- 1001 - Jump if overflow flag is not set
